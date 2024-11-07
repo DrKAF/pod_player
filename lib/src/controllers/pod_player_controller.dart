@@ -268,4 +268,8 @@ class PodPlayerController {
 
   /// Show overlay of video
   void showOverlay() => _ctr.isShowOverlay(true);
+
+  void changeVideoQuality(int quality) {
+    _ctr.changeVideoQuality(quality);
+  }
 }
