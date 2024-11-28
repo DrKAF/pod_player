@@ -268,4 +268,6 @@ class PodPlayerController {
 
   /// Show overlay of video
   void showOverlay() => _ctr.isShowOverlay(true);
+
+  bool get isOverlayVisible => _ctr.isOverlayVisible;
 }
