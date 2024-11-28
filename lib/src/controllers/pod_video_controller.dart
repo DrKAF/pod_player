@@ -8,6 +8,7 @@ class _PodVideoController extends _PodUiController {
   bool isLooping = false;
   bool isFullScreen = false;
   bool isvideoPlaying = false;
+  bool autoHideOverlay = true;
 
   List<String> videoPlaybackSpeeds = [
     '0.25x',
@@ -104,6 +105,9 @@ class _PodVideoController extends _PodUiController {
     showOverlayTimer1?.cancel();
     showOverlayTimer1 = Timer(delay ?? Duration.zero, () {
       if (isOverlayVisible != val) {
+        if (!val && delay != null && !autoHideOverlay) {
+          return;
+        }
         isOverlayVisible = val;
         update(['overlay']);
         update(['update-all']);

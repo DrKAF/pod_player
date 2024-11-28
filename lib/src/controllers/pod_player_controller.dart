@@ -270,4 +270,7 @@ class PodPlayerController {
   void showOverlay() => _ctr.isShowOverlay(true);
 
   bool get isOverlayVisible => _ctr.isOverlayVisible;
+
+  set autoHideOverlay(bool value) => _ctr.autoHideOverlay = value;
+  bool get autoHideOverlay => _ctr.autoHideOverlay;
 }
