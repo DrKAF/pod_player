@@ -180,9 +180,11 @@ class _VideoPlaybackSelectorMob extends StatelessWidget {
 
 class _MobileOverlayBottomControlles extends StatelessWidget {
   final String tag;
+  final Widget? overlayChild;
 
   const _MobileOverlayBottomControlles({
     required this.tag,
+    this.overlayChild,
   });
 
   @override
@@ -234,7 +236,7 @@ class _MobileOverlayBottomControlles extends StatelessWidget {
                     if (podCtr.isFullScreen) {
                       podCtr.disableFullScreen(context, tag);
                     } else {
-                      podCtr.enableFullScreen(tag);
+                      podCtr.enableFullScreen(tag, overlayChild);
                     }
                   } else {
                     podCtr.toggleVideoOverlay();

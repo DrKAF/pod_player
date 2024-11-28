@@ -229,7 +229,7 @@ class PodPlayerController {
   /// orientation by yourself.
   void enableFullScreen() {
     uni_html.document.documentElement?.requestFullscreen();
-    _ctr.enableFullScreen(getTag);
+    _ctr.enableFullScreen(getTag, null);
   }
 
   /// Disables fullscreen mode.
