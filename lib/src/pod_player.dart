@@ -44,6 +44,7 @@ class PodVideoPlayer extends StatefulWidget {
   final Widget? videoTitle;
   final Color? backgroundColor;
   final DecorationImage? videoThumbnail;
+  final Widget? overlayChild;
 
   /// Optional callback, fired when full screen mode toggles.
   ///
@@ -72,6 +73,7 @@ class PodVideoPlayer extends StatefulWidget {
     this.videoThumbnail,
     this.onToggleFullScreen,
     this.onLoading,
+    this.overlayChild,
   }) {
     addToUiController();
   }
@@ -256,6 +258,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
             videoPlayerCtr: podCtr.videoCtr!,
             videoAspectRatio: videoAspectRatio,
             tag: widget.controller.getTag,
+            overlayChild: widget.overlayChild,
           );
         },
       );
@@ -264,6 +267,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
         videoPlayerCtr: _podCtr.videoCtr!,
         videoAspectRatio: videoAspectRatio,
         tag: widget.controller.getTag,
+        overlayChild: widget.overlayChild,
       );
     }
   }

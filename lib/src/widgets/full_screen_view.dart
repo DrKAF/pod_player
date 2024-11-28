@@ -2,8 +2,11 @@ part of 'package:pod_player/src/pod_player.dart';
 
 class FullScreenView extends StatefulWidget {
   final String tag;
+  final Widget? overlayChild;
+
   const FullScreenView({
     required this.tag,
+    this.overlayChild,
     super.key,
   });
 
@@ -70,6 +73,7 @@ class _FullScreenViewState extends State<FullScreenView>
                               videoPlayerCtr: podCtr.videoCtr!,
                               videoAspectRatio:
                                   podCtr.videoCtr?.value.aspectRatio ?? 16 / 9,
+                              overlayChild: widget.overlayChild,
                             )
                           : loadingWidget,
                 ),

@@ -2,9 +2,11 @@ part of 'package:pod_player/src/pod_player.dart';
 
 class _MobileOverlay extends StatelessWidget {
   final String tag;
+  final Widget? child;
 
   const _MobileOverlay({
     required this.tag,
+    this.child,
   });
 
   @override
@@ -82,6 +84,7 @@ class _MobileOverlay extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: _MobileOverlayBottomControlles(tag: tag),
         ),
+        if (child != null) child!,
       ],
     );
   }
