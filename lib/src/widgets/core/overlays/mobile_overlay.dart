@@ -2,11 +2,11 @@ part of 'package:pod_player/src/pod_player.dart';
 
 class _MobileOverlay extends StatelessWidget {
   final String tag;
-  final Widget? child;
+  final Widget Function(BuildContext context, bool isFullScreen)? childBuilder;
 
   const _MobileOverlay({
     required this.tag,
-    this.child,
+    this.childBuilder,
   });
 
   @override
@@ -84,10 +84,10 @@ class _MobileOverlay extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: _MobileOverlayBottomControlles(
             tag: tag,
-            overlayChild: child,
+            overlayChildBuilder: childBuilder,
           ),
         ),
-        if (child != null) child!,
+        if (childBuilder != null) childBuilder!(context, podCtr.isFullScreen),
       ],
     );
   }

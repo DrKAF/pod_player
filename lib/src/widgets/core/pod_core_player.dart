@@ -4,13 +4,14 @@ class _PodCoreVideoPlayer extends StatelessWidget {
   final VideoPlayerController videoPlayerCtr;
   final double videoAspectRatio;
   final String tag;
-  final Widget? overlayChild;
+  final Widget Function(BuildContext context, bool isFullScreen)?
+      overlayChildBuilder;
 
   const _PodCoreVideoPlayer({
     required this.videoPlayerCtr,
     required this.videoAspectRatio,
     required this.tag,
-    this.overlayChild,
+    this.overlayChildBuilder,
   });
 
   @override
@@ -70,10 +71,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                   },
                 ),
               ),
-              _VideoOverlays(
-                tag: tag,
-                child: overlayChild,
-              ),
+              _VideoOverlays(tag: tag, childBuilder: overlayChildBuilder),
               IgnorePointer(
                 child: GetBuilder<PodGetXVideoController>(
                   tag: tag,
