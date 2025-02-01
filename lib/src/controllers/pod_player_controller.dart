@@ -273,4 +273,6 @@ class PodPlayerController {
 
   set autoHideOverlay(bool value) => _ctr.autoHideOverlay = value;
   bool get autoHideOverlay => _ctr.autoHideOverlay;
+
+  String? get lastException => _ctr.lastException;
 }

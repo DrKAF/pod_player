@@ -72,6 +72,7 @@ class PodGetXVideoController extends _PodGesturesController {
       Future<void>.delayed(const Duration(milliseconds: 600))
           .then((_) => _isWebAutoPlayDone = true);
     } catch (e) {
+      lastException = e.toString();
       podVideoStateChanger(PodVideoState.error);
       update(['errorState']);
       update(['update-all']);

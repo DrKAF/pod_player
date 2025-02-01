@@ -161,26 +161,6 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
     final circularProgressIndicator = _thumbnailAndLoadingWidget();
     _podCtr.mainContext = context;
 
-    final videoErrorWidget = AspectRatio(
-      aspectRatio: _frameAspectRatio,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(
-              Icons.warning,
-              color: Colors.yellow,
-              size: 32,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              widget.podPlayerLabels.error,
-              style: const TextStyle(color: Colors.red),
-            ),
-          ],
-        ),
-      ),
-    );
     return GetBuilder<PodGetXVideoController>(
       tag: widget.controller.getTag,
       builder: (_) {
@@ -196,7 +176,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
               builder: (podCtr) {
                 /// Check if has any error
                 if (podCtr.podVideoState == PodVideoState.error) {
-                  return widget.onVideoError?.call() ?? videoErrorWidget;
+                  return widget.onVideoError?.call() ?? _renderErrorWidget();
                 }
 
                 return AspectRatio(
@@ -210,6 +190,33 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
           ),
         );
       },
+    );
+  }
+
+  Widget _renderErrorWidget() {
+    return AspectRatio(
+      aspectRatio: _frameAspectRatio,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.warning,
+              color: Colors.yellow,
+              size: 32,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              widget.podPlayerLabels.error +
+                  (widget.controller.lastException != null
+                      ? '\nError: ${widget.controller.lastException}'
+                      : ''),
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
