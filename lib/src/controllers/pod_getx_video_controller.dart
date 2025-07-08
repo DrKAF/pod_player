@@ -82,6 +82,11 @@ class PodGetXVideoController extends _PodGesturesController {
   }
 
   Future<void> _initializePlayer() async {
+    if (_videoCtr != null) {
+      await _videoCtr!.dispose();
+      _videoCtr = null;
+    }
+
     switch (_videoPlayerType) {
       case PodVideoPlayerType.network:
 
