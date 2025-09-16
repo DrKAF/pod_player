@@ -149,6 +149,7 @@ class _PodVideoController extends _PodUiController {
       _currentPaybackSpeed = speed;
     }
     _videoCtr?.setPlaybackSpeed(pickedSpeed);
+    onPlaybackSpeedChanged?.call();
   }
 
   Future<void> setLooping(bool isLooped) async {

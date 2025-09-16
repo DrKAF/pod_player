@@ -29,6 +29,9 @@ class _PodBaseController extends GetxController {
 
   String _currentPaybackSpeed = '1x';
 
+  ///invokes callback from external controller when playback speed changes
+  VoidCallback? onPlaybackSpeedChanged;
+
   bool? isVideoUiBinded;
 
   bool? wasVideoPlayingOnUiDispose;

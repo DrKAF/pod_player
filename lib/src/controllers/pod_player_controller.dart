@@ -102,6 +102,12 @@ class PodPlayerController {
 
   bool get isMute => _ctr.isMute;
 
+  /// returns the current playback speed as a string (e.g., "1x", "1.5x", "2x")
+  String get currentPlaybackSpeed => _ctr.currentPaybackSpeed;
+
+  /// returns the list of available playback speeds
+  List<String> get availablePlaybackSpeeds => _ctr.videoPlaybackSpeeds;
+
   PodVideoState get videoState => _ctr.podVideoState;
 
   VideoPlayerValue? get videoPlayerValue => _ctr.videoCtr?.value;
@@ -158,6 +164,36 @@ class PodPlayerController {
   /// toggle the volume
   Future<void> toggleVolume() async {
     _ctr.isMute ? await _ctr.unMute() : await _ctr.mute();
+  }
+
+  //! playback speed controllers
+
+  /// Sets the playback speed of the video
+  ///
+  /// [speed] should be one of the available speeds from [availablePlaybackSpeeds]
+  /// Common values: '0.25x', '0.5x', '0.75x', '1x', '1.25x', '1.5x', '1.75x', '2x'
+  /// Also accepts 'Normal' which is equivalent to '1x'
+  void setPlaybackSpeed(String speed) => _ctr.setVideoPlayBack(speed);
+
+  /// Sets the playback speed using a double value
+  ///
+  /// [speed] should be a positive double (e.g., 0.5, 1.0, 1.5, 2.0)
+  void setPlaybackSpeedFromDouble(double speed) {
+    if (speed == 1) {
+      setPlaybackSpeed('Normal');
+    } else {
+      setPlaybackSpeed('${speed}x');
+    }
+  }
+
+  /// Gets the current playback speed as a double value
+  /// Returns 1.0 for 'Normal' or '1x', 1.5 for '1.5x', etc.
+  double get currentPlaybackSpeedAsDouble {
+    final speedString = currentPlaybackSpeed;
+    if (speedString == 'Normal' || speedString == '1x') {
+      return 1;
+    }
+    return double.tryParse(speedString.replaceAll('x', '')) ?? 1;
   }
 
   ///Dispose pod video player controller
@@ -247,6 +283,11 @@ class PodPlayerController {
   /// listener for the changes in the quality of the video
   void onVideoQualityChanged(VoidCallback callback) {
     _ctr.onVimeoVideoQualityChanged = callback;
+  }
+
+  /// listener for the changes in playback speed
+  void onPlaybackSpeedChanged(VoidCallback callback) {
+    _ctr.onPlaybackSpeedChanged = callback;
   }
 
   static Future<List<VideoQalityUrls>?> getYoutubeUrls(
